@@ -1,6 +1,9 @@
-document.getElementById("swaper").addEventListener("click", swapIt);        //TODO make a function to simplify all these click listener assignments
-document.getElementById("builder").addEventListener("click", buildIt);
+addClickElemId("swaper", swapIt);        //First test of the function
+addClickElemId("builder", buildIt);
 
+function addClickElemId(targetElement, clickFunction) {
+    document.getElementById(targetElement).addEventListener("click", clickFunction);
+}
 
 function swapIt() {                                                         //  appends text onto the end of the main header.
     let newText = document.getElementById("new_text").value;                //  might be similar to the fillElemId() function @  line 82
