@@ -1,0 +1,59 @@
+html {
+    background-color: #whitesmoke;
+}
+
+#header {
+    text-align: center;
+    text-justify: center;
+}
+
+#num_of_applicants, #amount_after {
+    width: 2em;
+}
+
+.hidden {
+    display: none;
+}
+
+#testing {
+    width: 2em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #fff5;
+    background-color: White;
+}
+
+#name_label, .income_label{
+    font-weight: bold;
+}
+
+#income_container {
+    margin-top: 1.5em;
+}
+
+.applicant_income_amt {
+    width: 5em;
+}
+
+.section_buttons {
+    display: none;
+    margin-top: 2em;
+}
+
+.template {
+    display: none;
+}
+
+.chunk {
+    display: block;
+    margin-left: 10em;
+}
+
+.phone_number {
+    width: 11em;
+}
+
+::placeholder {
+    font-style: italic;
+    opacity: 0.3;
+}
