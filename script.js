@@ -1,30 +1,29 @@
-addClickElemId("swaper", function() {fillElemId("unit_address", document.getElementById("new_text").value)});        
-addClickElemId("builder", buildIt);
+addClickElemId("swaper", function() {fillElemId("unit_address", document.getElementById("new_text").value)}); 
+// ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
+addClickElemId("builder", function(){buildIt(document.getElementById("num_of_applicants").value)});                                                                             
 
 function addClickElemId(targetElement, clickFunction) {                     // shorthand function to apply click event listeners to elements by id
     document.getElementById(targetElement).addEventListener("click", clickFunction);
 }
 
-/*function swapIt() {                                                         //  appends text onto the end of the main header.
-    fillElemId("unit_address", document.getElementById("new_text").value);
-}
-*/
-function buildIt() {                                                        // specific and overloaded function to create the name/income section of the form 
-    const theNumber=document.getElementById("num_of_applicants").value;     // depending on how many people the user specifies will be living at the property.    
+
+function buildIt(numOfAdults) {                                                        
+    // specific and overloaded function to create the name/income section of the form 
+    // depending on how many people the user specifies will be living at the property.    
     let applicantNameFormString;
 
-    for (let i=0; i<theNumber; i++) {                                        
+    for (let i=0; i<numOfAdults; i++) {                                        
         if (i==0){ 
             applicantNameFormString = `<div id="Applicant_${i}"><h3>Primary Applicant: </h3>`;      // sets section header for the first applicant as primary
         } else {
             applicantNameFormString = applicantNameFormString + `<div id="Applicant_${i}"><h3>Co-Applicant ${i}: </h3>`;    // numbers the header of additional Co-Applicants.
         }  
         
-        /*  
+        /*  VVVVVV
          *  applicantIdForm below is the basic template for each individual applicant form. 
          *  It is a string which is built by the loop function and applied to the innerHTML at the end.
          *  ID and Name attributes are itterated by the for loop above to allow unique useable form elements.
-         *  VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV
+         *  VVVVVV
          */
         let applicantIdForm = `<span class="chunk">                             
             <label for="applicant_${i}_first_name" id="name_label">Name:</label>
@@ -72,9 +71,9 @@ function buildIt() {                                                        // s
     fillElemId("applicant_info", applicantNameFormString);                  // The above for-loop is complete and this fills the resulting string into the div.
                                                                             // TODO this should be split between a few functions so this function call can use 
                                                                             // a function call as the second argument.
-    document.getElementById("num_of_applicants").innerHTML=`${theNumber}`;
-    document.getElementById("builder").style.display="none";
-    document.getElementById("section_1_buttons").style.display="block";
+    document.getElementById("num_of_applicants").innerHTML=`${numOfAdults}`;
+    document.getElementById("builder").classList.add("hidden");
+    document.getElementById("section_1_buttons").classList.remove("hidden");
     
     
 }
