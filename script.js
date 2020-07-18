@@ -13,9 +13,13 @@ addClickElemId("builder", function(){                       //sets submit functi
 });                                                                             
 
 addClickElemId("section_1_submit", function(){              //sets submit functions for section 1 submit button
+    hideElemId("section_0_form");
     hideElemId("section_1_buttons");      
     fillElemId("applicant_info", buildApplicantListAsText(buildApplicantObjects(numApplicants)));
+
 });
+
+
 
 function addClickElemId(targetElement, clickFunction) {                 // shorthand function to apply click event listeners to elements by id
     document.getElementById(targetElement).addEventListener("click", clickFunction);
