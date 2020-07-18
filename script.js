@@ -4,7 +4,7 @@ let i;                  //iterator for all the for loops that want to bitch abou
 
 addClickElemId("swaper", function() {fillElemId("unit_address", document.getElementById("new_text").value)}); 
 // ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
-addClickElemId("builder", function(){
+addClickElemId("builder", function(){                       //sets submit functions for number of applicants submit button
     numApplicants = document.getElementById("num_of_applicants").value;
     hideElemId("builder");
     fillElemId("applicant_info", buildIt(numApplicants));
@@ -12,16 +12,16 @@ addClickElemId("builder", function(){
     showElemId("section_1_buttons");
 });                                                                             
 
-addClickElemId("section_1_submit", function(){
+addClickElemId("section_1_submit", function(){              //sets submit functions for section 1 submit button
     hideElemId("section_1_buttons");      
     fillElemId("applicant_info", buildApplicantListAsText(buildApplicantObjects(numApplicants)));
 });
 
-function addClickElemId(targetElement, clickFunction) {                     // shorthand function to apply click event listeners to elements by id
+function addClickElemId(targetElement, clickFunction) {                 // shorthand function to apply click event listeners to elements by id
     document.getElementById(targetElement).addEventListener("click", clickFunction);
 }
 
-function buildIt(numOfAdults) {                                                        
+function buildIt(numOfAdults) {                                         //contstructs html form with the correct number of applicants                                     
     // specific and overloaded function to create the name/income section of the form 
     // depending on how many people the user specifies will be living at the property.    
     let applicantNameFormString;
@@ -84,7 +84,7 @@ function buildIt(numOfAdults) {
     
 }
 
-function buildApplicantObjects(n) {
+function buildApplicantObjects(n) {                                     //constructs an array of objects containing applicants form info.
     let applicants=[];
     for (i=0; i<n; i++) {
         applicants[i] = {
@@ -101,14 +101,13 @@ function buildApplicantObjects(n) {
             incomeSource:   document.getElementById(`applicant_${i}_income_source`).value,
             employer:       document.getElementById(`applicant_${i}_employer`).value,
             employerPhone:  document.getElementById(`applicant_${i}_employer_phone`).value,
-            nameLast:       document.getElementById(`applicant_${i}_last_name`).value,
             notes:          document.getElementById(`applicant_${i}_notes`),
         };
     }
     return applicants;
 }
 
-function buildApplicantListAsText(applicantList){
+function buildApplicantListAsText(applicantList){                       //constructs html text display of applicant info as entered when submited
     let result='<div id="final_applicant_list">';
     let nextApplicant;
     for (i=0; i<applicantList.length; i++){
@@ -121,8 +120,12 @@ function buildApplicantListAsText(applicantList){
             <h2>Co-Applicant ${i}:<h2>
             `;}
         nextApplicant=nextApplicant+`
-            <h3>${applicantList[`${i}`].nameFirst} ${applicantList[`${i}`].nameMiddle} ${applicantList[`${i}`].nameLast}<h3>
-            
+            <h3>${applicantList[`${i}`].namePrefer}</h3>
+            <p>Full Name: ${applicantList[`${i}`].nameFirst} ${applicantList[`${i}`].nameMiddle} ${applicantList[`${i}`].nameLast}</p>
+            <p>AKA: ${applicantList[`${i}`].aka}</p>
+            <p>Current Address: ${applicantList[`${i}`].currentAddress}</p>
+            <p>Telephone #: ${applicantList[`${i}`].phoneNumber} OK to text: ${applicantList[`${i}`].textOK}</p>
+            <p>Employer: ${applicantList[`${i}`].employer} ${applicantList[`${i}`].employerPhone}</p>
         </div>
         `;
         result=result+nextApplicant;
@@ -131,22 +134,22 @@ function buildApplicantListAsText(applicantList){
     return result;
 }
 
-function freezeElemId(targetElement) {
+function freezeElemId(targetElement) {                                  //disables a text or number input field and makes it a type="text"
     document.getElementById(targetElement).disabled = true;
     document.getElementById(targetElement).type = "text";
 }
 
-function fillElemId(targetElement, input) {                         // writes string data into an html element (by ID)
+function fillElemId(targetElement, input) {                             // writes string data into an html element (by ID)
     document.getElementById(targetElement).innerHTML = input;       // Syntax: fillElemId("example_element_id", string);
-}                                                                   // each argument must be in quotes unless it is a string variable 
+}                                                                       // each argument must be in quotes unless it is a string variable 
 
-function hideElemId(targetElement) {
+function hideElemId(targetElement) {                                    // adds class="hidden" to targetElement if it does not already contain class="hidden"
     if (!(document.getElementById(targetElement).classList.contains("hidden"))){
     document.getElementById(targetElement).classList.add("hidden");
     }
 }
 
-function showElemId(targetElement) {
+function showElemId(targetElement) {                                   // removes class="hidden" from targetElement if it currently contains class="hidden"
     if (document.getElementById(targetElement).classList.contains("hidden")){
     document.getElementById(targetElement).classList.remove("hidden");
     }
