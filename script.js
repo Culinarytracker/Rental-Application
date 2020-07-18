@@ -1,15 +1,14 @@
-addClickElemId("swaper", swapIt);        //First test of the function
+addClickElemId("swaper", function() {fillElemId("unit_address", document.getElementById("new_text").value)});        
 addClickElemId("builder", buildIt);
 
-function addClickElemId(targetElement, clickFunction) {
+function addClickElemId(targetElement, clickFunction) {                     // shorthand function to apply click event listeners to elements by id
     document.getElementById(targetElement).addEventListener("click", clickFunction);
 }
 
-function swapIt() {                                                         //  appends text onto the end of the main header.
-    let newText = document.getElementById("new_text").value;                //  might be similar to the fillElemId() function @  line 82
-    document.getElementById("unit_address").innerHTML = newText; 
+/*function swapIt() {                                                         //  appends text onto the end of the main header.
+    fillElemId("unit_address", document.getElementById("new_text").value);
 }
-
+*/
 function buildIt() {                                                        // specific and overloaded function to create the name/income section of the form 
     const theNumber=document.getElementById("num_of_applicants").value;     // depending on how many people the user specifies will be living at the property.    
     let applicantNameFormString;
@@ -70,9 +69,9 @@ function buildIt() {                                                        // s
     }
 
 
-    fillElemId("applicant_info", applicantNameFormString);                 // The above for-loop is complete and this fills the resulting string into the div.
-                                                                                // TODO this should be split between a few functions so this function call can use 
-                                                                                // a function call as the second argument.
+    fillElemId("applicant_info", applicantNameFormString);                  // The above for-loop is complete and this fills the resulting string into the div.
+                                                                            // TODO this should be split between a few functions so this function call can use 
+                                                                            // a function call as the second argument.
     document.getElementById("num_of_applicants").innerHTML=`${theNumber}`;
     document.getElementById("builder").style.display="none";
     document.getElementById("section_1_buttons").style.display="block";
