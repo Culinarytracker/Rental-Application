@@ -77,6 +77,6 @@ function buildIt() {                                                        // s
     
 }
 
-function fillElemId(targetElement, input) {                        // writes string data into an html element (by ID)
-    document.getElementById(targetElement).innerHTML = input;
-}
+function fillElemId(targetElement, input) {                         // writes string data into an html element (by ID)
+    document.getElementById(targetElement).innerHTML = input;       // Syntax: fillElemId("example_element_id", string);
+}                                                                   // each argument must be in quotes unless it is a string variable 
