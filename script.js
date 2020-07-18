@@ -1,18 +1,32 @@
+let numApplicants;
+let i;                  //iterator for all the for loops that want to bitch about it already being defined.
+
+
 addClickElemId("swaper", function() {fillElemId("unit_address", document.getElementById("new_text").value)}); 
 // ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
-addClickElemId("builder", function(){buildIt(document.getElementById("num_of_applicants").value)});                                                                             
+addClickElemId("builder", function(){
+    numApplicants = document.getElementById("num_of_applicants").value;
+    hideElemId("builder");
+    fillElemId("applicant_info", buildIt(numApplicants));
+    freezeElemId("num_of_applicants");
+    showElemId("section_1_buttons");
+});                                                                             
+
+addClickElemId("section_1_submit", function(){
+    hideElemId("section_1_buttons");      
+    fillElemId("applicant_info", buildApplicantListAsText(buildApplicantObjects(numApplicants)));
+});
 
 function addClickElemId(targetElement, clickFunction) {                     // shorthand function to apply click event listeners to elements by id
     document.getElementById(targetElement).addEventListener("click", clickFunction);
 }
-
 
 function buildIt(numOfAdults) {                                                        
     // specific and overloaded function to create the name/income section of the form 
     // depending on how many people the user specifies will be living at the property.    
     let applicantNameFormString;
 
-    for (let i=0; i<numOfAdults; i++) {                                        
+    for (i=0; i<numOfAdults; i++) {                                        
         if (i==0){ 
             applicantNameFormString = `<div id="Applicant_${i}"><h3>Primary Applicant: </h3>`;      // sets section header for the first applicant as primary
         } else {
@@ -66,18 +80,62 @@ function buildIt(numOfAdults) {
 
     applicantNameFormString = applicantNameFormString + applicantIdForm;       // Appends applicant templates to headers (above) and combines them into one string. 
     }
-
-
-    fillElemId("applicant_info", applicantNameFormString);                  // The above for-loop is complete and this fills the resulting string into the div.
-                                                                            // TODO this should be split between a few functions so this function call can use 
-                                                                            // a function call as the second argument.
-    document.getElementById("num_of_applicants").innerHTML=`${numOfAdults}`;
-    document.getElementById("builder").classList.add("hidden");
-    document.getElementById("section_1_buttons").classList.remove("hidden");
+    return applicantNameFormString;
     
-    
+}
+
+function buildApplicantObjects(n) {
+    let applicants=[];
+    for (i=0; i<n; i++) {
+        applicants[i] = {
+            nameFirst: document.getElementById(`applicant_${i}_first_name`).value,
+            nameMiddle: document.getElementById(`applicant_${i}_middle_name`).value,
+            nameLast: document.getElementById(`applicant_${i}_last_name`).value,
+        };
+    }
+    return applicants;
+}
+
+function buildApplicantListAsText(applicantList){
+    let result='<div id="final_applicant_list">';
+    let nextApplicant;
+    for (i=0; i<applicantList.length; i++){
+        if (i==0){
+            nextApplicant=`
+        
+            <h1>Primary Applicant:</h1>
+        `;} else {
+            nextApplicant =`
+            <h2>Co-Applicant ${i}:<h2>
+            `;}
+        nextApplicant=nextApplicant+`
+            <h3>${applicantList[`${i}`].nameFirst} ${applicantList[`${i}`].nameMiddle} ${applicantList[`${i}`].nameLast}<h3>
+            
+        </div>
+        `;
+        result=result+nextApplicant;
+    }
+    result=result+`</div>`
+    return result;
+}
+
+function freezeElemId(targetElement) {
+    document.getElementById(targetElement).disabled = true;
+    document.getElementById(targetElement).type = "text";
 }
 
 function fillElemId(targetElement, input) {                         // writes string data into an html element (by ID)
     document.getElementById(targetElement).innerHTML = input;       // Syntax: fillElemId("example_element_id", string);
 }                                                                   // each argument must be in quotes unless it is a string variable 
+
+function hideElemId(targetElement) {
+    if (!(document.getElementById(targetElement).classList.contains("hidden"))){
+    document.getElementById(targetElement).classList.add("hidden");
+    }
+}
+
+function showElemId(targetElement) {
+    if (document.getElementById(targetElement).classList.contains("hidden")){
+    document.getElementById(targetElement).classList.remove("hidden");
+    }
+}
