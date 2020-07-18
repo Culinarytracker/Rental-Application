@@ -56,10 +56,10 @@ function buildIt(numOfAdults) {
         <span class="chunk">
             <label for="prev_${i}_email">E-Mail Address: </label>
             <input id="prev_${i}_email" name="prev_${i}_email" type="email"><br>
-            <label for="appplicant_${i}_phone">Telephone Number: </label>
-            <input id="appplicant_${i}_phone" class="phone_number" name="appplicant_${i}_phone" type="tel"><br>
-            <label for="appplicant_${i}_current_address">Current Address: </label>
-            <input id="appplicant_${i}_current_address" class="current_address" name="appplicant_${i}_current_address" type="text"><br>
+            <label for="applicant_${i}_phone">Telephone Number: </label>
+            <input id="applicant_${i}_phone" class="phone_number" name="applicant_${i}_phone" type="tel"><br>
+            <label for="applicant_${i}_current_address">Current Address: </label>
+            <input id="applicant_${i}_current_address" class="current_address" name="applicant_${i}_current_address" type="text"><br>
             <label for="text_${i}_permission">Is it OK to text message you? </label>
             <input type="radio" name="text_${i}_permission" value="Y">Yes</input>
             <input type="radio" name="text_${i}_permission" value="N">No</input><br>
@@ -88,9 +88,21 @@ function buildApplicantObjects(n) {
     let applicants=[];
     for (i=0; i<n; i++) {
         applicants[i] = {
-            nameFirst: document.getElementById(`applicant_${i}_first_name`).value,
-            nameMiddle: document.getElementById(`applicant_${i}_middle_name`).value,
-            nameLast: document.getElementById(`applicant_${i}_last_name`).value,
+            nameFirst:      document.getElementById(`applicant_${i}_first_name`).value,
+            nameMiddle:     document.getElementById(`applicant_${i}_middle_name`).value,
+            nameLast:       document.getElementById(`applicant_${i}_last_name`).value,
+            aka:            document.getElementById(`prev_${i}_names`).value,
+            namePrefer:     document.getElementById(`prev_${i}_name_pref`).value,
+            emailAddress:   document.getElementById(`prev_${i}_email`).value,
+            phoneNumber:    document.getElementById(`applicant_${i}_phone`).value,
+            currentAddress: document.getElementById(`applicant_${i}_current_address`).value,
+            textOK:         document.getElementsByName(`text_${i}_permission`).value,
+            incomeAmt:      document.getElementById(`applicant_${i}_income_amt`).value,
+            incomeSource:   document.getElementById(`applicant_${i}_income_source`).value,
+            employer:       document.getElementById(`applicant_${i}_employer`).value,
+            employerPhone:  document.getElementById(`applicant_${i}_employer_phone`).value,
+            nameLast:       document.getElementById(`applicant_${i}_last_name`).value,
+            notes:          document.getElementById(`applicant_${i}_notes`),
         };
     }
     return applicants;
