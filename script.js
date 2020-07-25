@@ -7,17 +7,29 @@ addClickElemId("swaper", function() {fillElemId("unit_address", document.getElem
 addClickElemId("builder", function(){                       //sets submit functions for number of applicants submit button
     numApplicants = document.getElementById("num_of_applicants").value;
     hideElemId("builder");
-    fillElemId("applicant_info", buildIt(numApplicants));
+    fillElemId("applicant_form", buildIt(numApplicants));
     freezeElemId("num_of_applicants");
+    showElemId("applicant_info");
     showElemId("section_1_buttons");
+
 });                                                                             
 
 addClickElemId("section_1_submit", function(){              //sets submit functions for section 1 submit button
     hideElemId("section_0_form");
-    hideElemId("section_1_buttons");      
-    fillElemId("applicant_info", buildApplicantListAsText(buildApplicantObjects(numApplicants)));
+    hideElemId("section_1_buttons"); 
+    hideElemId('applicant_form');     
+    fillElemId("applicant_list", buildApplicantListAsText(buildApplicantObjects(numApplicants)));
 
 });
+
+addClickElemId("section_1_back", function() {
+    hideElemId("applicant_info");
+    hideElemId("section_1_buttons"); 
+    showElemId("builder");
+    showElemId("section_0_form"); 
+    document.getElementById("num_of_applicants").disabled = false;
+    
+})
 
 
 
@@ -25,7 +37,7 @@ function addClickElemId(targetElement, clickFunction) {                 // short
     document.getElementById(targetElement).addEventListener("click", clickFunction);
 }
 
-function buildIt(numOfAdults) {                                         //contstructs html form with the correct number of applicants                                     
+function buildIt(numOfAdults) {                                         //contstructs html form string with the correct number of applicants                                     
     // specific and overloaded function to create the name/income section of the form 
     // depending on how many people the user specifies will be living at the property.    
     let applicantNameFormString;
