@@ -18,12 +18,13 @@
     <hr>
 </div>
 
-<div id="section_0_form">
+<div id="section_0_container">
     <label for="amt_applicants">How many adults (18+) will be living at the property?</label>
     <input type="number" id="num_of_applicants" name="amt_applicants" min="1" max="9" step="1" autofocus>
     <button id="builder">Submit</button>
 </div>
 
+<div id="section_1_container">
 <div id="applicant_info">
     <div id="applicant_form"></div>
     <div id="applicant_list"></div>
@@ -32,11 +33,16 @@
 <div class="section_buttons, hidden" id="section_1_buttons">
     <button class="section_button" id="section_1_back">Back</button><button class="section_button" id="section_1_submit">Submit</button>
 </div>
+</div>
+
 <div id="section_2_container" class="hidden">
     <div id="dependant_question_container">
         <label for="dependant_question">How many dependants (under 18) will be living at the property?</label>
-        <input type="text" name="dependant_question" id="num_dependants">
+        <input type="text" name="dependant_question" id="num_dependants" autocomplete="off">
         <button id="num_dependants_button">Submit</button>
+    </div>
+    <div id="dependant_form_container">
+        
     </div>
 </div>
 

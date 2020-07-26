@@ -15,7 +15,7 @@ addClickElemId("builder", function(){                       //sets submit functi
 });                                                                             
 
 addClickElemId("section_1_submit", function(){              //sets submit functions for section 1 submit button
-    hideElemId("section_0_form");
+    hideElemId("section_0_container");
     hideElemId("section_1_buttons"); 
     hideElemId('applicant_form');
     showElemId('section_2_container');     
@@ -28,11 +28,14 @@ addClickElemId("section_1_back", function() {
     showElemId('applicant_form');
     hideElemId("section_1_buttons"); 
     showElemId("builder");
-    showElemId("section_0_form"); 
+    showElemId("section_0_container"); 
     document.getElementById("num_of_applicants").disabled = false;
     
-})
+});
 
+addClickElemId("num_dependants_button", function(){
+    fillElemId("dependant_form_container", buildDependants(document.getElementById("num_dependants").value));
+});
 
 
 function addClickElemId(targetElement, clickFunction) {                 // shorthand function to apply click event listeners to elements by id
@@ -102,6 +105,28 @@ function buildIt(numOfAdults) {                                         //contst
     
 }
 
+function buildDependants(numOfDependants) {                             //constructs html form string with the correct number of dependants
+    let dependantFormString;
+
+    for (i=1; i<=numOfDependants; i++) {                                        
+        
+            dependantFormString = dependantFormString + `<div id="dependant_${i}"><h3>Dependant ${i}: </h3>`;
+
+            let dependantIdForm = `<span class="chunk">
+        <label for="dependant_${i}_name">Name: </label>
+        <input id="dependant_${i}_name" name="dependant_${i}_name" type="text">
+        <label for="dependant_${i}_age">Age: </label>
+        <input id="dependant_${i}_age" class="age" name="dependant_${i}_age" type="text">
+        <label for="dependant_${i}_relationship">Relationship: </label>
+        <input id="ependant_${i}_relationship" class="relationship" name="ependant_${i}_relationship" type="text"><br>
+        </span>`;
+
+            dependantFormString = dependantFormString+dependantIdForm;
+        }  
+        return dependantFormString;
+        
+}
+
 function buildApplicantObjects(n) {                                     //constructs an array of objects containing applicants form info.
     let applicants=[];
     for (i=0; i<n; i++) {
@@ -139,11 +164,11 @@ function buildApplicantListAsText(applicantList){                       //constr
             `;}
         nextApplicant=nextApplicant+`
             <h3>${applicantList[`${i}`].namePrefer}</h3>
-            <p>Full Name: ${applicantList[`${i}`].nameFirst} ${applicantList[`${i}`].nameMiddle} ${applicantList[`${i}`].nameLast}</p>
-            <p>AKA: ${applicantList[`${i}`].aka}</p>
-            <p>Current Address: ${applicantList[`${i}`].currentAddress}</p>
-            <p>Telephone #: ${applicantList[`${i}`].phoneNumber} OK to text: ${applicantList[`${i}`].textOK}</p>
-            <p>Employer: ${applicantList[`${i}`].employer} ${applicantList[`${i}`].employerPhone}</p>
+            <p><b>Full Name:</b> ${applicantList[`${i}`].nameFirst} ${applicantList[`${i}`].nameMiddle} ${applicantList[`${i}`].nameLast}</p>
+            <p><b>AKA:</b> ${applicantList[`${i}`].aka}</p>
+            <p><b>Current Address:</b> ${applicantList[`${i}`].currentAddress}</p>
+            <p><b>Telephone #:</b> ${applicantList[`${i}`].phoneNumber} <b>OK to text:</b> ${applicantList[`${i}`].textOK}</p>
+            <p><b>Employer:</b> ${applicantList[`${i}`].employer} ${applicantList[`${i}`].employerPhone}</p>
         </div>
         `;
         result=result+nextApplicant;
