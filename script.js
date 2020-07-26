@@ -24,6 +24,7 @@ addClickElemId("section_1_submit", function(){              //sets submit functi
 
 addClickElemId("section_1_back", function() {
     hideElemId("applicant_info");
+    showElemId('applicant_form');
     hideElemId("section_1_buttons"); 
     showElemId("builder");
     showElemId("section_0_form"); 
@@ -77,8 +78,8 @@ function buildIt(numOfAdults) {                                         //contst
             <label for="applicant_${i}_current_address">Current Address: </label>
             <input id="applicant_${i}_current_address" class="current_address" name="applicant_${i}_current_address" type="text"><br>
             <label for="text_${i}_permission">Is it OK to text message you? </label>
-            <input type="radio" name="text_${i}_permission" value="Y">Yes</input>
-            <input type="radio" name="text_${i}_permission" value="N">No</input><br>
+            <input type="radio" name="text_${i}_permission" value="Yes">Yes</input>
+            <input type="radio" name="text_${i}_permission" value="No">No</input><br>
         </span>
 
         <span class="chunk" id="income_container">
@@ -112,7 +113,8 @@ function buildApplicantObjects(n) {                                     //constr
             emailAddress:   document.getElementById(`prev_${i}_email`).value,
             phoneNumber:    document.getElementById(`applicant_${i}_phone`).value,
             currentAddress: document.getElementById(`applicant_${i}_current_address`).value,
-            textOK:         document.getElementsByName(`text_${i}_permission`).value,
+            textOK:         document.querySelector(`input[name=text_${i}_permission]:checked`).value,
+            //textOK:         document.getElementsByName(`text_${i}_permission`).value,
             incomeAmt:      document.getElementById(`applicant_${i}_income_amt`).value,
             incomeSource:   document.getElementById(`applicant_${i}_income_source`).value,
             employer:       document.getElementById(`applicant_${i}_employer`).value,
