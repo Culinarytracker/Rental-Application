@@ -20,6 +20,7 @@ addClickElemId("section_1_submit", function(){              //sets submit functi
     hideElemId('applicant_form');
     showElemId('section_2_container');     
     fillElemId("applicant_list", buildApplicantListAsText(buildApplicantObjects(numApplicants)));
+    document.querySelector('#num_dependants').focus();
 
 });
 
@@ -34,7 +35,9 @@ addClickElemId("section_1_back", function() {
 });
 
 addClickElemId("num_dependants_button", function(){
+    hideElemId("dependant_question_container");
     fillElemId("dependant_form_container", buildDependants(document.getElementById("num_dependants").value));
+    if (document.getElementById("num_dependants").value>=0) document.querySelector(`#dependant_1_name`).focus();
 });
 
 
@@ -68,22 +71,22 @@ function buildIt(numOfAdults) {                                         //contst
         </span>
     
         <span class="chunk">
-            <label for="prev_${i}_names">Any other name you may have used:</label>
-            <input id="prev_${i}_names" name="prev_${i}_names" type="text" placeholder="(optional)"><br>
-            <label for="prev_${i}_name_pref">What name do you prefer to go by? </label>
-            <input id="prev_${i}_name_pref" name="prev_${i}_name_pref" type="text" placeholder="(optional)">
+            <label for="applicant_${i}_other_names">Any other name you may have used:</label>
+            <input id="applicant_${i}_other_names" name="applicant_${i}_other_names" type="text" placeholder="(optional)"><br>
+            <label for="applicant_${i}_name_pref">What name do you prefer to go by? </label>
+            <input id="applicant_${i}_name_pref" name="applicant_${i}_name_pref" type="text" placeholder="(optional)">
         </span>
 
         <span class="chunk">
-            <label for="prev_${i}_email">E-Mail Address: </label>
-            <input id="prev_${i}_email" name="prev_${i}_email" type="email"><br>
+            <label for="applicant_${i}_email">E-Mail Address: </label>
+            <input id="applicant_${i}_email" name="applicant_${i}_email" type="email"><br>
             <label for="applicant_${i}_phone">Telephone Number: </label>
             <input id="applicant_${i}_phone" class="phone_number" name="applicant_${i}_phone" type="tel"><br>
             <label for="applicant_${i}_current_address">Current Address: </label>
             <input id="applicant_${i}_current_address" class="current_address" name="applicant_${i}_current_address" type="text"><br>
-            <label for="text_${i}_permission">Is it OK to text message you? </label>
-            <input type="radio" name="text_${i}_permission" value="Yes">Yes</input>
-            <input type="radio" name="text_${i}_permission" value="No">No</input><br>
+            <label for="applicant_${i}_textOk">Is it OK to text message you? </label>
+            <input type="radio" name="applicant_${i}_textOk" value="Yes" checked>Yes</input>
+            <input type="radio" name="applicant_${i}_textOk" value="No">No</input><br>
         </span>
 
         <span class="chunk" id="income_container">
@@ -106,7 +109,7 @@ function buildIt(numOfAdults) {                                         //contst
 }
 
 function buildDependants(numOfDependants) {                             //constructs html form string with the correct number of dependants
-    let dependantFormString;
+    let dependantFormString='';
 
     for (i=1; i<=numOfDependants; i++) {                                        
         
@@ -134,12 +137,12 @@ function buildApplicantObjects(n) {                                     //constr
             nameFirst:      document.querySelector(`#applicant_${i}_first_name`).value,
             nameMiddle:     document.querySelector(`#applicant_${i}_middle_name`).value,
             nameLast:       document.querySelector(`#applicant_${i}_last_name`).value,
-            aka:            document.querySelector(`#prev_${i}_names`).value,
-            namePrefer:     document.querySelector(`#prev_${i}_name_pref`).value,
-            emailAddress:   document.querySelector(`#prev_${i}_email`).value,
+            aka:            document.querySelector(`#applicant_${i}_other_names`).value,
+            namePrefer:     document.querySelector(`#applicant_${i}_name_pref`).value,
+            emailAddress:   document.querySelector(`#applicant_${i}_email`).value,
             phoneNumber:    document.querySelector(`#applicant_${i}_phone`).value,
             currentAddress: document.querySelector(`#applicant_${i}_current_address`).value,
-            textOK:         document.querySelector(`input[name=text_${i}_permission]:checked`).value,
+            textOK:         document.querySelector(`input[name=applicant_${i}_textOk]:checked`).value,
             incomeAmt:      document.querySelector(`#applicant_${i}_income_amt`).value,
             incomeSource:   document.querySelector(`#applicant_${i}_income_source`).value,
             employer:       document.querySelector(`#applicant_${i}_employer`).value,

@@ -44,6 +44,10 @@ html {
     display: none;
 }
 
+#applicant_list {
+    font-size: '8px';
+}
+
 .chunk {
     display: block;
     margin-left: 10em;
