@@ -1,10 +1,11 @@
 let numApplicants;
+let numOfDependants
 let i;                  //iterator for all the for loops that want to bitch about it already being defined.
 
 
 addClickElemId("swaper", function() {fillElemId("unit_address", document.querySelector("#new_text").value)}); 
 // ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
-addClickElemId("builder", function(){                       //sets submit functions for number of applicants submit button
+addClickElemId("builder", function(){
     numApplicants = document.querySelector("#num_of_applicants").value;
     hideElemId("builder");
     fillElemId("applicant_form", buildIt(numApplicants));
@@ -14,7 +15,7 @@ addClickElemId("builder", function(){                       //sets submit functi
 
 });                                                                             
 
-addClickElemId("section_1_submit", function(){              //sets submit functions for section 1 submit button
+addClickElemId("section_1_submit", function(){
     hideElemId("section_0_container");
     hideElemId("section_1_buttons"); 
     hideElemId('applicant_form');
@@ -34,19 +35,29 @@ addClickElemId("section_1_back", function() {
     
 });
 
-addClickElemId("num_dependants_button", function(){
+addClickElemId("num_dependants_button", function() {
     hideElemId("dependant_question_container");
     showElemId('dependant_form_container');
-    fillElemId("dependant_form", buildDependants(document.querySelector("#num_dependants").value));
+    numOfDependants = document.querySelector("#num_dependants").value;
+    fillElemId("dependant_form", buildDependants(numOfDependants));
     if (document.querySelector("#num_dependants").value>=0) document.querySelector(`#dependant_1_name`).focus();
 });
 
-addClickElemId("dependant_form_back", function(){
+addClickElemId("dependant_form_back", function() {
     hideElemId("dependant_form_container");
     showElemId("dependant_question_container");
 });
 
+addClickElemId("dependant_form_submit", function() {
+    fillElemId("dependant_list", buildDependantsList(buildDependantObjects(numOfDependants)));
+    hideElemId("dependant_form_container");
+    showElemId("dependant_list_container");
+});
 
+addClickElemId("dependant_list_back", function() {
+    hideElemId("dependant_list_container");
+    showElemId("dependant_form_container");
+});
 
 
 
@@ -123,23 +134,45 @@ function buildIt(numOfAdults) {                                         //contst
 function buildDependants(numOfDependants) {                             //constructs html form string with the correct number of dependants
     let dependantFormString='';
 
-    for (i=1; i<=numOfDependants; i++) {                                        
+    for (i=0; i<numOfDependants; i++) {                                        
         
-            dependantFormString = dependantFormString + `<div id="dependant_${i}"><h3>Dependant ${i}: </h3>`;
-
-            let dependantIdForm = `<span class="chunk">
-        <label for="dependant_${i}_name">Name: </label>
-        <input id="dependant_${i}_name" name="dependant_${i}_name" type="text">
-        <label for="dependant_${i}_age">Age: </label>
-        <input id="dependant_${i}_age" class="age" name="dependant_${i}_age" type="text">
-        <label for="dependant_${i}_relationship">Relationship: </label>
-        <input id="ependant_${i}_relationship" class="relationship" name="ependant_${i}_relationship" type="text"><br>
-        </span>`;
-
-            dependantFormString = dependantFormString+dependantIdForm;
+            dependantFormString = dependantFormString + `
+                <div id="dependant_${i}">
+                    <h3>Dependant ${i}: </h3>
+                    <span class="chunk">
+                        <label for="dependant_${i}_name">Name: </label>
+                        <input id="dependant_${i}_name" name="dependant_${i}_name" type="text">
+                        <label for="dependant_${i}_age">Age: </label>
+                        <input id="dependant_${i}_age" class="age" name="dependant_${i}_age" type="text">
+                        <label for="dependant_${i}_relationship">Relationship: </label>
+                        <input id="dependant_${i}_relationship" class="relationship" name="dependant_${i}_relationship" type="text">
+                    </span><br>
+                </div>
+            `;
         }  
         return dependantFormString;
         
+}
+
+function buildDependantsList(dependantObjects) {                        //constructs list string from form above        
+    let dependantListString = '';
+    
+    for (i=0; i<numOfDependants; i++) {                
+        dependantListString = dependantListString + `<p id="dependant_entry_${i}"><b>Dependant #${i}:</b>${dependantObjects[i].name}, <b>Age:</b> ${dependantObjects[i].age}, <b>Relationship:</b> ${dependantObjects[i].relationship}<br>`;
+    }
+    return dependantListString;
+}
+
+function buildDependantObjects(n) {                                     //constructs an array of objects containing dependants form info.
+    let dependants=[];
+    for (i=0; i<n; i++) {
+        dependants[i] = {
+            name:           document.querySelector(`#dependant_${i}_name`).value,
+            age:            document.querySelector(`#dependant_${i}_age`).value,
+            relationship:   document.querySelector(`#dependant_${i}_relationship`).value,
+        };
+    }
+    return dependants;
 }
 
 function buildApplicantObjects(n) {                                     //constructs an array of objects containing applicants form info.
