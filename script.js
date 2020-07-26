@@ -2,10 +2,10 @@ let numApplicants;
 let i;                  //iterator for all the for loops that want to bitch about it already being defined.
 
 
-addClickElemId("swaper", function() {fillElemId("unit_address", document.getElementById("new_text").value)}); 
+addClickElemId("swaper", function() {fillElemId("unit_address", document.querySelector("#new_text").value)}); 
 // ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
 addClickElemId("builder", function(){                       //sets submit functions for number of applicants submit button
-    numApplicants = document.getElementById("num_of_applicants").value;
+    numApplicants = document.querySelector("#num_of_applicants").value;
     hideElemId("builder");
     fillElemId("applicant_form", buildIt(numApplicants));
     freezeElemId("num_of_applicants");
@@ -30,14 +30,14 @@ addClickElemId("section_1_back", function() {
     hideElemId("section_1_buttons"); 
     showElemId("builder");
     showElemId("section_0_container"); 
-    document.getElementById("num_of_applicants").disabled = false;
+    document.querySelector("#num_of_applicants").disabled = false;
     
 });
 
 addClickElemId("num_dependants_button", function(){
     hideElemId("dependant_question_container");
-    fillElemId("dependant_form_container", buildDependants(document.getElementById("num_dependants").value));
-    if (document.getElementById("num_dependants").value>=0) document.querySelector(`#dependant_1_name`).focus();
+    fillElemId("dependant_form_container", buildDependants(document.querySelector("#num_dependants").value));
+    if (document.querySelector("#num_dependants").value>=0) document.querySelector(`#dependant_1_name`).focus();
 });
 
 
