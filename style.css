@@ -7,7 +7,7 @@ html {
     text-justify: center;
 }
 
-#num_of_applicants, #amount_after,  #num_dependants, .age{
+#num_of_applicants, #amount_after,  #num_dependants, .age, #num_pets{
     width: 2em;
 }
 

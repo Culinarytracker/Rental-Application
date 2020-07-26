@@ -1,9 +1,12 @@
 let numApplicants;
-let numOfDependants
+let numOfDependants;
+let numOfPets;
 let i;                  //iterator for all the for loops that want to bitch about it already being defined.
 
 
-addClickElemId("swaper", function() {fillElemId("unit_address", document.querySelector("#new_text").value)}); 
+addClickElemId("swaper", function() {
+    fillElemId("unit_address", document.querySelector("#new_text").value)
+}); 
 // ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
 addClickElemId("builder", function(){
     numApplicants = document.querySelector("#num_of_applicants").value;
@@ -12,7 +15,7 @@ addClickElemId("builder", function(){
     freezeElemId("num_of_applicants");
     showElemId("applicant_info");
     showElemId("section_1_buttons");
-
+    document.querySelector(`#applicant_0_first_name`).focus();
 });                                                                             
 
 addClickElemId("section_1_submit", function(){
@@ -40,7 +43,7 @@ addClickElemId("num_dependants_button", function() {
     showElemId('dependant_form_container');
     numOfDependants = document.querySelector("#num_dependants").value;
     fillElemId("dependant_form", buildDependants(numOfDependants));
-    if (document.querySelector("#num_dependants").value>=0) document.querySelector(`#dependant_1_name`).focus();
+    if (document.querySelector("#num_dependants").value>=0) document.querySelector(`#dependant_0_name`).focus();
 });
 
 addClickElemId("dependant_form_back", function() {
@@ -58,6 +61,38 @@ addClickElemId("dependant_list_back", function() {
     hideElemId("dependant_list_container");
     showElemId("dependant_form_container");
 });
+
+addClickElemId("dependant_list_submit", function() {
+    showElemId("section_3_container");
+    showElemId("pet_question_container");
+    document.querySelector(`#num_pets`).focus();
+    hideElemId("dependant_list_buttons");
+});
+
+addClickElemId("num_pets_button", function() {
+    hideElemId("pet_question_container");
+    showElemId('pet_form_container');
+    numOfpets = document.querySelector("#num_pets").value;
+    fillElemId("pet_form", buildpets(numOfpets));
+    if (document.querySelector("#num_pets").value>=0) document.querySelector(`#pet_0_name`).focus();
+});
+
+addClickElemId("pet_form_back", function() {
+    hideElemId("pet_form_container");
+    showElemId("pet_question_container");
+});
+
+addClickElemId("pet_form_submit", function() {
+    fillElemId("pet_list", buildpetsList(buildpetObjects(numOfpets)));
+    hideElemId("pet_form_container");
+    showElemId("pet_list_container");
+});
+
+addClickElemId("pet_list_back", function() {
+    hideElemId("pet_list_container");
+    showElemId("pet_form_container");
+});
+
 
 
 
@@ -131,6 +166,50 @@ function buildIt(numOfAdults) {                                         //contst
     
 }
 
+function buildpets(numOfpets) {                             //constructs html form string with the correct number of pets
+    let petFormString='';
+
+    for (i=0; i<numOfpets; i++) {                                        
+        
+            petFormString = petFormString + `
+                <div id="pet_${i}">
+                    <h3>Pet ${i+1}: </h3>
+                    <span class="chunk">
+                        <label for="pet_${i}_name">Name: </label>
+                        <input id="pet_${i}_name" name="pet_${i}_name" type="text">
+                        <label for="pet_${i}_age">Age: </label>
+                        <input id="pet_${i}_age" class="age" name="pet_${i}_age" type="text">
+                        <label for="pet_${i}_type">Type: </label>
+                        <input id="pet_${i}_type" class="type" name="pet_${i}_type" type="text">
+                    </span>
+                </div>
+            `;
+        }  
+        return petFormString;
+        
+}
+
+function buildpetsList(petObjects) {                        //constructs list string from form above        
+    let petListString = '';
+    
+    for (i=0; i<numOfpets; i++) {                
+        petListString = petListString + `<p id="pet_entry_${i}"><b>Pet #${i+1}:</b>${petObjects[i].name}, <b>Age:</b> ${petObjects[i].age}, <b>Type:</b> ${petObjects[i].type}</p>`;
+    }
+    return petListString;
+}
+
+function buildpetObjects(n) {                                     //constructs an array of objects containing pets form info.
+    let pets=[];
+    for (i=0; i<n; i++) {
+        pets[i] = {
+            name:           document.querySelector(`#pet_${i}_name`).value,
+            age:            document.querySelector(`#pet_${i}_age`).value,
+            type:           document.querySelector(`#pet_${i}_type`).value,
+        };
+    }
+    return pets;
+}
+
 function buildDependants(numOfDependants) {                             //constructs html form string with the correct number of dependants
     let dependantFormString='';
 
@@ -138,7 +217,7 @@ function buildDependants(numOfDependants) {                             //constr
         
             dependantFormString = dependantFormString + `
                 <div id="dependant_${i}">
-                    <h3>Dependant ${i}: </h3>
+                    <h3>Dependant ${i+1}: </h3>
                     <span class="chunk">
                         <label for="dependant_${i}_name">Name: </label>
                         <input id="dependant_${i}_name" name="dependant_${i}_name" type="text">
@@ -158,7 +237,7 @@ function buildDependantsList(dependantObjects) {                        //constr
     let dependantListString = '';
     
     for (i=0; i<numOfDependants; i++) {                
-        dependantListString = dependantListString + `<p id="dependant_entry_${i}"><b>Dependant #${i}:</b>${dependantObjects[i].name}, <b>Age:</b> ${dependantObjects[i].age}, <b>Relationship:</b> ${dependantObjects[i].relationship}<br>`;
+        dependantListString = dependantListString + `<p id="dependant_entry_${i}"><b>Dependant #${i+1}:</b>${dependantObjects[i].name}, <b>Age:</b> ${dependantObjects[i].age}, <b>Relationship:</b> ${dependantObjects[i].relationship}<br>`;
     }
     return dependantListString;
 }
@@ -205,13 +284,13 @@ function buildApplicantListAsText(applicantList){                       //constr
         if (i==0){
             nextApplicant=`
         
-            <h1>Primary Applicant:</h1>
+            <h3>Primary Applicant:</h3>
         `;} else {
             nextApplicant =`
-            <h2>Co-Applicant ${i}:<h2>
+            <h4>Co-Applicant ${i}:<h4>
             `;}
         nextApplicant=nextApplicant+`
-            <h3>${applicantList[`${i}`].namePrefer}</h3>
+            <h5>${applicantList[`${i}`].namePrefer}</h5>
             <p><b>Full Name:</b> ${applicantList[`${i}`].nameFirst} ${applicantList[`${i}`].nameMiddle} ${applicantList[`${i}`].nameLast}</p>
             <p><b>AKA:</b> ${applicantList[`${i}`].aka}</p>
             <p><b>Current Address:</b> ${applicantList[`${i}`].currentAddress}</p>
