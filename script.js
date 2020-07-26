@@ -36,9 +36,21 @@ addClickElemId("section_1_back", function() {
 
 addClickElemId("num_dependants_button", function(){
     hideElemId("dependant_question_container");
-    fillElemId("dependant_form_container", buildDependants(document.querySelector("#num_dependants").value));
+    showElemId('dependant_form_container');
+    fillElemId("dependant_form", buildDependants(document.querySelector("#num_dependants").value));
     if (document.querySelector("#num_dependants").value>=0) document.querySelector(`#dependant_1_name`).focus();
 });
+
+addClickElemId("dependant_form_back", function(){
+    hideElemId("dependant_form_container");
+    showElemId("dependant_question_container");
+});
+
+
+
+
+
+
 
 
 function addClickElemId(targetElement, clickFunction) {                 // shorthand function to apply click event listeners to elements by id
