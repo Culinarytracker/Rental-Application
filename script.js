@@ -17,7 +17,8 @@ addClickElemId("builder", function(){                       //sets submit functi
 addClickElemId("section_1_submit", function(){              //sets submit functions for section 1 submit button
     hideElemId("section_0_form");
     hideElemId("section_1_buttons"); 
-    hideElemId('applicant_form');     
+    hideElemId('applicant_form');
+    showElemId('section_2_container');     
     fillElemId("applicant_list", buildApplicantListAsText(buildApplicantObjects(numApplicants)));
 
 });
@@ -114,7 +115,6 @@ function buildApplicantObjects(n) {                                     //constr
             phoneNumber:    document.getElementById(`applicant_${i}_phone`).value,
             currentAddress: document.getElementById(`applicant_${i}_current_address`).value,
             textOK:         document.querySelector(`input[name=text_${i}_permission]:checked`).value,
-            //textOK:         document.getElementsByName(`text_${i}_permission`).value,
             incomeAmt:      document.getElementById(`applicant_${i}_income_amt`).value,
             incomeSource:   document.getElementById(`applicant_${i}_income_source`).value,
             employer:       document.getElementById(`applicant_${i}_employer`).value,
