@@ -131,20 +131,20 @@ function buildApplicantObjects(n) {                                     //constr
     let applicants=[];
     for (i=0; i<n; i++) {
         applicants[i] = {
-            nameFirst:      document.getElementById(`applicant_${i}_first_name`).value,
-            nameMiddle:     document.getElementById(`applicant_${i}_middle_name`).value,
-            nameLast:       document.getElementById(`applicant_${i}_last_name`).value,
-            aka:            document.getElementById(`prev_${i}_names`).value,
-            namePrefer:     document.getElementById(`prev_${i}_name_pref`).value,
-            emailAddress:   document.getElementById(`prev_${i}_email`).value,
-            phoneNumber:    document.getElementById(`applicant_${i}_phone`).value,
-            currentAddress: document.getElementById(`applicant_${i}_current_address`).value,
+            nameFirst:      document.querySelector(`#applicant_${i}_first_name`).value,
+            nameMiddle:     document.querySelector(`#applicant_${i}_middle_name`).value,
+            nameLast:       document.querySelector(`#applicant_${i}_last_name`).value,
+            aka:            document.querySelector(`#prev_${i}_names`).value,
+            namePrefer:     document.querySelector(`#prev_${i}_name_pref`).value,
+            emailAddress:   document.querySelector(`#prev_${i}_email`).value,
+            phoneNumber:    document.querySelector(`#applicant_${i}_phone`).value,
+            currentAddress: document.querySelector(`#applicant_${i}_current_address`).value,
             textOK:         document.querySelector(`input[name=text_${i}_permission]:checked`).value,
-            incomeAmt:      document.getElementById(`applicant_${i}_income_amt`).value,
-            incomeSource:   document.getElementById(`applicant_${i}_income_source`).value,
-            employer:       document.getElementById(`applicant_${i}_employer`).value,
-            employerPhone:  document.getElementById(`applicant_${i}_employer_phone`).value,
-            notes:          document.getElementById(`applicant_${i}_notes`),
+            incomeAmt:      document.querySelector(`#applicant_${i}_income_amt`).value,
+            incomeSource:   document.querySelector(`#applicant_${i}_income_source`).value,
+            employer:       document.querySelector(`#applicant_${i}_employer`).value,
+            employerPhone:  document.querySelector(`#applicant_${i}_employer_phone`).value,
+            notes:          document.querySelector(`#applicant_${i}_notes`),
         };
     }
     return applicants;
