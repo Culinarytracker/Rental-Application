@@ -1,12 +1,9 @@
 let numApplicants;
 let numOfDependants;
 let numOfPets;
-let i;                  //iterator for all the for loops that want to bitch about it already being defined.
+let i;                  //iterator for all the for loops that want to bitch about it already being declared.
 
 
-addClickElemId("swaper", function() {
-    fillElemId("unit_address", document.querySelector("#new_text").value)
-}); 
 // ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
 addClickElemId("builder", function(){
     numApplicants = document.querySelector("#num_of_applicants").value;
@@ -18,7 +15,7 @@ addClickElemId("builder", function(){
     document.querySelector(`#applicant_0_first_name`).focus();
 });                                                                   
 
-document.querySelector("#num_of_applicants").addEventListener("keyup", function(event) {
+document.querySelector("#num_of_applicants").addEventListener("keyup", function(event) {            //make hitting enter the same as clicking submit
     if (event.keyCode===13){
         document.querySelector("#builder").click();
     }
@@ -103,6 +100,65 @@ addClickElemId("pet_form_submit", function() {
 addClickElemId("pet_list_back", function() {
     hideElemId("pet_list_container");
     showElemId("pet_form_container");
+});
+
+addClickElemId("pet_list_submit", function() {
+    hideElemId("section_3_container");
+    showElemId("section_4_container");
+});
+
+addClickElemId("eviction_question_yes", function() {
+    showElemId("eviction_explain_container");
+    document.querySelector("#eviction_question_yes").disabled = true;
+    document.querySelector("#eviction_question_no").disabled = true;
+    document.querySelector("#eviction_explain").focus();
+});
+
+addClickElemId("eviction_question_no", function() {
+    document.querySelector("#eviction_question_yes").disabled = true;
+    document.querySelector("#eviction_question_no").disabled = true;
+    showElemId("criminal_question_container");
+});
+
+addClickElemId("eviction_explain_submit", function() {
+    showElemId("criminal_question_container");
+    hideElemId("eviction_explain_submit");
+});
+
+addClickElemId("criminal_question_yes", function() {
+    showElemId("criminal_explain_container");
+    document.querySelector("#criminal_question_yes").disabled = true;
+    document.querySelector("#criminal_question_no").disabled = true;
+    document.querySelector("#criminal_explain").focus();
+});
+
+addClickElemId("criminal_question_no", function() {
+    document.querySelector("#criminal_question_yes").disabled = true;
+    document.querySelector("#criminal_question_no").disabled = true;
+    showElemId("money_question_container");
+});
+
+addClickElemId("criminal_explain_submit", function() {
+    showElemId("money_question_container");
+    hideElemId("criminal_explain_submit");
+});
+
+addClickElemId("money_question_no", function() {
+    document.querySelector("#money_question_yes").disabled = true;
+    document.querySelector("#money_question_no").disabled = true;
+    showElemId("money_explain_container");
+    document.querySelector("#money_explain").focus();
+});
+
+addClickElemId("money_question_yes", function() {
+    document.querySelector("#money_question_yes").disabled = true;
+    document.querySelector("#money_question_no").disabled = true;
+    //showElemId("approve_question_container");
+});
+
+addClickElemId("money_explain_submit", function() {
+    //showElemId("approve_question_container");
+    hideElemId("money_explain_submit");
 });
 
 

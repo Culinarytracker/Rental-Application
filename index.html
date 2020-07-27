@@ -7,14 +7,11 @@
     </head>
 <body>
 
-<div class="hidden" id="swapButtonContainer" >
-    <input type="text" id="new_text">
-    <button id="swaper">Swap!</button>   
-</div>
+
 
 <div id="header">
     <hr>
-    <h1>Rental Application for: <span id="unit_address"></span></h1>
+    <h1>Rental Application for: <span id="unit_address">802 Sugar St.</span></h1>
     <hr>
 </div>
 
@@ -75,6 +72,47 @@
         <div id="pet_list_buttons">
             <button id="pet_list_back">Back</button>
             <button id="pet_list_submit">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<div id="section_4_container" class="hidden">
+    <div id="final_questions_form">
+        <div id="eviction_question_container">
+            <label for="eviction_question">Has any applicant been asked to leave or evicted from any rental property?</label>
+            <input type="radio" name="eviction_question" id="eviction_question_yes" value="yes" autocomplete="off">Yes</input>
+            <input type="radio" name="eviction_question" id="eviction_question_no" value="no" autocomplete="off">No</input>
+            <div id="eviction_explain_container" class="hidden">
+                <label for="eviction_explain">Please Explain: </label>
+                <input type="text" name="eviction_explain" id="eviction_explain" autocomplete="off">
+                <button id="eviction_explain_submit">Continue</button>
+            </div>  
+        </div>
+        <div id="criminal_question_container" class="hidden">
+            <label for="criminal_question">Does any applicant have a criminal record?</label>
+            <input type="radio" name="criminal_question" id="criminal_question_yes" value="yes" autocomplete="off">Yes</input>
+            <input type="radio" name="criminal_question" id="criminal_question_no" value="no" autocomplete="off">No</input>
+            <div id="criminal_explain_container" class="hidden">
+                <label for="criminal_explain">Please Explain: </label>
+                <input type="text" name="criminal_explain" id="criminal_explain">
+                <button id="criminal_explain_submit">Continue</button>
+            </div>  
+        </div>
+
+        <div id="money_question_container" class="hidden">
+            <label for="money_question">Do you have the full move-in amount available now?</label>
+            <input type="radio" name="money_question" id="money_question_yes" value="yes" autocomplete="off">Yes</input>
+            <input type="radio" name="money_question" id="money_question_no" value="no" autocomplete="off">No</input>
+            <div id="money_explain_container" class="hidden">
+                <label for="money_explain">When will the full move-in amount be available? </label>
+                <input type="text" name="money_explain" id="money_explain">
+                <button id="money_explain_submit">Continue</button>
+            </div>  
+        </div>
+
+        <div id="section_4_buttons" class="hidden">
+            <button id="Section_4_back">Back</button>
+            <button id="Section_4_submit">Submit</button>
         </div>
     </div>
 </div>
