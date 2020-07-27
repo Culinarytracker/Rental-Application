@@ -20,7 +20,7 @@
 
 <div id="section_0_container">
     <label for="amt_applicants">How many adults (18+) will be living at the property?</label>
-    <input type="number" id="num_of_applicants" name="amt_applicants" min="1" max="9" step="1" autofocus>
+    <input type="text" id="num_of_applicants" name="amt_applicants" autocomplete="off" autofocus> 
     <button id="builder">Submit</button>
 </div>
 
@@ -52,14 +52,14 @@
         <div id="dependant_list"></div>
         <div id="dependant_list_buttons">
             <button id="dependant_list_back">Back</button>
-            <button id="dependant_list_submit">Continue</button>
+            <button id="dependant_list_submit">Confirm</button>
         </div>
     </div>
 </div>
 
 <div id="section_3_container" class="hidden">
     <div id="pet_question_container" class="hidden">
-        <label for="pet_question">How many pets will be living at the property?</label>
+        <label for="pet_question">How many pets will be at the property?</label>
         <input type="text" name="pet_question" id="num_pets" autocomplete="off">
         <button id="num_pets_button">Submit</button>
     </div>
@@ -74,7 +74,7 @@
         <div id="pet_list"></div>
         <div id="pet_list_buttons">
             <button id="pet_list_back">Back</button>
-            <button id="pet_list_submit">Continue</button>
+            <button id="pet_list_submit">Confirm</button>
         </div>
     </div>
 </div>

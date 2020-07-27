@@ -65,16 +65,22 @@ addClickElemId("dependant_list_back", function() {
 addClickElemId("dependant_list_submit", function() {
     showElemId("section_3_container");
     showElemId("pet_question_container");
-    document.querySelector(`#num_pets`).focus();
-    hideElemId("dependant_list_buttons");
+    hideElemId("section_2_container");
+    hideElemId("section_1_container");
+    document.querySelector(`#num_pets`).focus();    
 });
 
 addClickElemId("num_pets_button", function() {
+    numOfpets = document.querySelector("#num_pets").value;
+    if (numOfPets==0) {
+        //skip all this pet stuff;
+    }else{
     hideElemId("pet_question_container");
     showElemId('pet_form_container');
-    numOfpets = document.querySelector("#num_pets").value;
+    
     fillElemId("pet_form", buildpets(numOfpets));
-    if (document.querySelector("#num_pets").value>=0) document.querySelector(`#pet_0_name`).focus();
+    document.querySelector(`#pet_0_name`).focus();
+    }
 });
 
 addClickElemId("pet_form_back", function() {
