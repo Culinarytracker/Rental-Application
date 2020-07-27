@@ -16,7 +16,13 @@ addClickElemId("builder", function(){
     showElemId("applicant_info");
     showElemId("section_1_buttons");
     document.querySelector(`#applicant_0_first_name`).focus();
-});                                                                             
+});                                                                   
+
+document.querySelector("#num_of_applicants").addEventListener("keyup", function(event) {
+    if (event.keyCode===13){
+        document.querySelector("#builder").click();
+    }
+})
 
 addClickElemId("section_1_submit", function(){
     hideElemId("section_0_container");
