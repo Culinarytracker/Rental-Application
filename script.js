@@ -17,11 +17,11 @@ addClickElemId("builder", function(){
     document.querySelector(`#applicant_0_first_name`).focus();
 });                                                                   
 
-document.querySelector("#num_of_applicants").addEventListener("keyup", function(event) {            //make hitting enter the same as clicking submit
-    if (event.keyCode===13){
-        document.querySelector("#builder").click();
-    }
-})
+addEnterKeyEvent("#num_of_applicants", "#builder");
+
+addEnterKeyEvent("#num_dependants", "#num_dependants_button");
+
+addEnterKeyEvent("#num_pets", "#num_pets_button");
 
 addClickElemId("section_1_submit", function(){
     hideElemId("section_0_container");
@@ -45,10 +45,15 @@ addClickElemId("section_1_back", function() {
 
 addClickElemId("num_dependants_button", function() {
     hideElemId("dependant_question_container");
-    showElemId('dependant_form_container');
     numOfDependants = document.querySelector("#num_dependants").value;
-    fillElemId("dependant_form", buildDependants(numOfDependants));
-    if (document.querySelector("#num_dependants").value>=0) document.querySelector(`#dependant_0_name`).focus();
+    
+    if (document.querySelector("#num_dependants").value>0) {        
+        showElemId('dependant_form_container');        
+        fillElemId("dependant_form", buildDependants(numOfDependants));
+        document.querySelector(`#dependant_0_name`).focus();
+    }else {
+        document.querySelector("#dependant_list_submit").click();
+    }
 });
 
 addClickElemId("dependant_form_back", function() {
@@ -77,8 +82,8 @@ addClickElemId("dependant_list_submit", function() {
 
 addClickElemId("num_pets_button", function() {
     numOfpets = document.querySelector("#num_pets").value;
-    if (numOfPets==0) {
-        //skip all this pet stuff;
+    if (numOfpets==0) {
+        document.querySelector("#pet_list_submit").click();
     }else{
     hideElemId("pet_question_container");
     showElemId('pet_form_container');
@@ -174,7 +179,13 @@ addClickElemId("approval_submit", function() {
 
 
 
-
+function addEnterKeyEvent(targetElement, buttonToClick) {
+    document.querySelector(targetElement).addEventListener("keyup", function(event) {            
+        if (event.keyCode===13){
+            document.querySelector(buttonToClick).click();
+        }
+    })
+}
 
 function addClickElemId(targetElement, clickFunction) {                 // shorthand function to apply click event listeners to elements by id
     document.getElementById(targetElement).addEventListener("click", clickFunction);
