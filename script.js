@@ -236,7 +236,7 @@ function buildIt(numOfAdults) {                                         //contst
         </span>
 
         <span class="chunk" id="income_container">
-            <label for="applicant_${i}_income_amt" class="income_label">Income: $</label>
+            <label for="applicant_${i}_income_amt" class="income_label">Monthly Income: $</label>
             <input id="applicant_${i}_income_amt" name="applicant_${i}_income_amt" class="applicant_entry applicant_income_amt" type="text" required>
             <label for="applicant_${i}_income_source">Source(s):</label>
             <input id="applicant_${i}_income_source" name="applicant_${i}_income_source" class="applicant_entry applicant_income_source" type="text" required><br>
