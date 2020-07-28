@@ -2,7 +2,9 @@ let numApplicants;
 let numOfDependants;
 let numOfPets;
 let i;                  //iterator for all the for loops that want to bitch about it already being declared.
-
+let applicants=[];
+let dependants=[];
+let pets=[];
 
 // ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
 addClickElemId("builder", function(){
@@ -153,13 +155,20 @@ addClickElemId("money_question_no", function() {
 addClickElemId("money_question_yes", function() {
     document.querySelector("#money_question_yes").disabled = true;
     document.querySelector("#money_question_no").disabled = true;
-    //showElemId("approve_question_container");
+    showElemId("approve_question_container");
 });
 
 addClickElemId("money_explain_submit", function() {
-    //showElemId("approve_question_container");
+    showElemId("approve_question_container");
     hideElemId("money_explain_submit");
 });
+
+addClickElemId("approval_submit", function() {
+    hideElemId("section_4_container");
+    hideElemId("approve_question_container");
+    showElemId("thank_you");
+});
+
 
 
 
@@ -234,6 +243,7 @@ function buildIt(numOfAdults) {                                         //contst
     
 }
 
+
 function buildpets(numOfpets) {                             //constructs html form string with the correct number of pets
     let petFormString='';
 
@@ -267,7 +277,7 @@ function buildpetsList(petObjects) {                        //constructs list st
 }
 
 function buildpetObjects(n) {                                     //constructs an array of objects containing pets form info.
-    let pets=[];
+    
     for (i=0; i<n; i++) {
         pets[i] = {
             name:           document.querySelector(`#pet_${i}_name`).value,
@@ -311,7 +321,7 @@ function buildDependantsList(dependantObjects) {                        //constr
 }
 
 function buildDependantObjects(n) {                                     //constructs an array of objects containing dependants form info.
-    let dependants=[];
+    
     for (i=0; i<n; i++) {
         dependants[i] = {
             name:           document.querySelector(`#dependant_${i}_name`).value,
@@ -323,7 +333,7 @@ function buildDependantObjects(n) {                                     //constr
 }
 
 function buildApplicantObjects(n) {                                     //constructs an array of objects containing applicants form info.
-    let applicants=[];
+    
     for (i=0; i<n; i++) {
         applicants[i] = {
             nameFirst:      document.querySelector(`#applicant_${i}_first_name`).value,

@@ -61,3 +61,8 @@ html {
     font-style: italic;
     opacity: 0.3;
 }
+
+#approval_submit {
+    width: 10%;
+   margin-left: 45%;
+}
