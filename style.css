@@ -1,10 +1,17 @@
 html {
     background-color: whitesmoke;
 }
-
+#application_container {
+    display: grid;
+    grid-template-columns: 1fr, 1fr, 1fr, 1fr;
+    grid-template-rows: auto;
+    
+}
 #header {
     text-align: center;
     text-justify: center;
+    text-decoration: underline;
+    margin-bottom: 3em;
 }
 
 #num_of_applicants, #amount_after,  #num_dependants, .age, #num_pets{
@@ -35,14 +42,11 @@ html {
     width: 5em;
 }
 
-.section_buttons {
-    display: none;
-    margin-top: 2em;
+.section_button {
+    margin-top: 3em;
+    margin-bottom: 5em;
 }
 
-.template {
-    display: none;
-}
 
 #applicant_list {
     font-size: '8px';
