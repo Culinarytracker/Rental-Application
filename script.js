@@ -11,7 +11,7 @@ addClickElemId("builder", function(){
     numApplicants = document.querySelector("#num_of_applicants").value;
     hideElemId("builder");
     fillElemId("applicant_form", buildIt(numApplicants));
-    freezeElemId("num_of_applicants");
+    hideElemId("section_0_container");
     showElemId("applicant_info");
     showElemId("section_1_buttons");
     document.querySelector(`#applicant_0_first_name`).focus();
@@ -40,6 +40,7 @@ addClickElemId("section_1_back", function() {
     showElemId("builder");
     showElemId("section_0_container"); 
     document.querySelector("#num_of_applicants").disabled = false;
+    document.querySelector("#num_of_applicants").focus();
     
 });
 
@@ -179,6 +180,39 @@ addClickElemId("approval_submit", function() {
 
 
 
+
+
+
+
+function getErrorMsg(msg) {
+    let errorMsg = document.createElement("span");
+    errorMsg.textContent=msg;
+    errorMsg.classList.add("errorMsg");
+    return errorMsg;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function addEnterKeyEvent(targetElement, buttonToClick) {
     document.querySelector(targetElement).addEventListener("keyup", function(event) {            
         if (event.keyCode===13){
@@ -211,9 +245,9 @@ function buildIt(numOfAdults) {                                         //contst
          */
         let applicantIdForm = `<span class="chunk">                             
             <label for="applicant_${i}_first_name" id="name_label">Name:</label>
-            <input id="applicant_${i}_first_name" name="applicant_${i}_first_name" class="applicant_entry applicant_first_name" type="text" placeholder="First" required>
-            <input id="applicant_${i}_middle_name" name="applicant_${i}_middle_name" class="applicant_entry applicant_middle_name" type="text" placeholder="Middle" required>
-            <input id="applicant_${i}_last_name" name="applicant_${i}_last_name" class="applicant_entry applicant_last_name" type="text" placeholder="Last" required>
+            <input id="applicant_${i}_first_name" name="applicant_${i}_first_name" class="applicant_name applicant_first_name" type="text" placeholder="First" required>
+            <input id="applicant_${i}_middle_name" name="applicant_${i}_middle_name" class="applicant_name applicant_middle_name" type="text" placeholder="Middle" required>
+            <input id="applicant_${i}_last_name" name="applicant_${i}_last_name" class="applicant_name applicant_last_name" type="text" placeholder="Last" required>
         </span>
     
         <span class="chunk">

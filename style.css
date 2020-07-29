@@ -1,6 +1,45 @@
 html {
     background-color: whitesmoke;
 }
+body {
+/* font-family: 'Noto Sans HK', sans-serif; */
+font-family: 'Signika', sans-serif;
+}
+
+input {
+    font-size: large;
+    border-style: solid;
+    border-color: black;
+    border-radius: 15px;
+    margin-top: 0.25em;
+}
+
+input[type=text], input[type=email], input[type=tel]  {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+
+input:focus {
+    border-color: limegreen;
+    outline: none;
+}
+
+.invalid_input_value {
+    border-style: solid;
+    border-color: red;
+}
+
+.errorMsg {
+    font-size: small;
+    color: red;
+    margin-left: 1em;
+}
+
+h3 {
+    margin-left: 5em;
+    text-decoration: underline;
+}
+
 #application_container {
     display: grid;
     grid-template-columns: 1fr, 1fr, 1fr, 1fr;
@@ -15,15 +54,17 @@ html {
 }
 
 .small_number_input {
-    width: 2em;
+    width: 1em;
 }
 
 .hidden {
     display: none;
 }
 
-
-#name_label, .income_label{
+.applicant_name {
+    max-width: 10em;
+}
+#name_label, .income_label, label{
     font-weight: bold;
 }
 
