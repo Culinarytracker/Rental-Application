@@ -14,7 +14,7 @@ html {
     margin-bottom: 3em;
 }
 
-#num_of_applicants, #amount_after,  #num_dependants, .age, #num_pets{
+.small_number_input {
     width: 2em;
 }
 
@@ -22,13 +22,6 @@ html {
     display: none;
 }
 
-#testing {
-    width: 2em;
-    border-style: solid;
-    border-width: 1px;
-    border-color: #fff5;
-    background-color: White;
-}
 
 #name_label, .income_label{
     font-weight: bold;

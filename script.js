@@ -267,7 +267,7 @@ function buildpets(numOfpets) {                             //constructs html fo
                         <label for="pet_${i}_name">Name: </label>
                         <input id="pet_${i}_name" name="pet_${i}_name" type="text">
                         <label for="pet_${i}_age">Age: </label>
-                        <input id="pet_${i}_age" class="age" name="pet_${i}_age" type="text">
+                        <input id="pet_${i}_age" class="small_number_input" name="pet_${i}_age" type="text">
                         <label for="pet_${i}_type">Type: </label>
                         <input id="pet_${i}_type" class="type" name="pet_${i}_type" type="text">
                     </span>
@@ -311,7 +311,7 @@ function buildDependants(numOfDependants) {                             //constr
                         <label for="dependant_${i}_name">Name: </label>
                         <input id="dependant_${i}_name" name="dependant_${i}_name" type="text">
                         <label for="dependant_${i}_age">Age: </label>
-                        <input id="dependant_${i}_age" class="age" name="dependant_${i}_age" type="text">
+                        <input id="dependant_${i}_age" class="small_number_input" name="dependant_${i}_age" type="text">
                         <label for="dependant_${i}_relationship">Relationship: </label>
                         <input id="dependant_${i}_relationship" class="relationship" name="dependant_${i}_relationship" type="text">
                     </span><br>
