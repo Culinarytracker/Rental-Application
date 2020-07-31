@@ -10,7 +10,7 @@ let pets=[];
 addClickElemId("builder", function(){
     let x=document.querySelector("#num_of_applicants");
 
-    if (x.classList.contains("valid_input_value") && x.value>0){
+    if (isValid(x)){
         numApplicants = x.value;
         hideElemId("builder");
         fillElemId("applicant_form", buildIt(numApplicants));
@@ -49,15 +49,17 @@ addClickElemId("section_1_back", function() {
 });
 
 addClickElemId("num_dependants_button", function() {
-    hideElemId("dependant_question_container");
-    numOfDependants = document.querySelector("#num_dependants").value;
-    
-    if (document.querySelector("#num_dependants").value>0) {        
-        showElemId('dependant_form_container');        
-        fillElemId("dependant_form", buildDependants(numOfDependants));
-        document.querySelector(`#dependant_0_name`).focus();
-    }else {
-        document.querySelector("#dependant_list_submit").click();
+    let x=document.querySelector("#num_dependants");
+    if (isValid(x)){
+        hideElemId("dependant_question_container");
+  
+        if (checkIfOneOrMore(x.value)) {        
+            showElemId('dependant_form_container');        
+            fillElemId("dependant_form", buildDependants(x.value));
+            document.querySelector(`#dependant_0_name`).focus();
+        }else {
+            document.querySelector("#dependant_list_submit").click();
+        }
     }
 });
 
@@ -190,28 +192,21 @@ addClickElemId("approval_submit", function() {
 
 
 
-function validateNumericInput(a){
-    if (checkIfNull(a.value)){
-        setAsWaiting(a);
-        if (checkHasErrorMsg(a)) {
-            removeErrorMsg(a);
-        }
-    }else if (checkIfPositiveInt(a.value)==false) {
-        setAsInvalid(a);
-        if(checkHasErrorMsg(a)==false){
-            appendErrorMsg(a, "Input must be a number.")
-        }
-    }else if (checkIfPositiveInt(a.value)){
-        setAsValid(a);
-        if (checkHasErrorMsg(a)) removeErrorMsg(a);
-    }
 
-}
 
-let thisInput = document.querySelector("#num_of_applicants");
-thisInput.addEventListener("keyup", function () {
-    validateNumericInput(thisInput);
+document.querySelector("#num_of_applicants").addEventListener("keyup", function () {
+    validateNumericInputOneOrMore(document.querySelector("#num_of_applicants"));
 });
+
+document.querySelector("#num_dependants").addEventListener("keyup", function () {
+    validateNumericInput(document.querySelector("#num_dependants"));
+});
+
+
+document.querySelector("#num_pets").addEventListener("keyup", function () {
+    validateNumericInput(document.querySelector("#num_pets"));
+});
+
 
 
 
