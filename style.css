@@ -24,10 +24,12 @@ input:focus {
     outline: none;
 }
 
-.invalid_input_value {
+input.invalid_input_value {
     border-style: solid;
     border-color: red;
 }
+
+
 
 .errorMsg {
     font-size: small;

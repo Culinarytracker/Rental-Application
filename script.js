@@ -9,14 +9,15 @@ let pets=[];
 // ^^^vvv wrapping the fillElemId() in an anonymous function prevents it from running automatically
 addClickElemId("builder", function(){
     let x=document.querySelector("#num_of_applicants");
+
     if (x.classList.contains("valid_input_value") && x.value>0){
-    numApplicants = x.value;
-    hideElemId("builder");
-    fillElemId("applicant_form", buildIt(numApplicants));
-    hideElemId("section_0_container");
-    showElemId("applicant_info");
-    showElemId("section_1_buttons");
-    document.querySelector(`#applicant_0_first_name`).focus();
+        numApplicants = x.value;
+        hideElemId("builder");
+        fillElemId("applicant_form", buildIt(numApplicants));
+        hideElemId("section_0_container");
+        showElemId("applicant_info");
+        showElemId("section_1_buttons");
+        document.querySelector(`#applicant_0_first_name`).focus();
     }else x.focus();
 });                                                                   
 
@@ -187,40 +188,29 @@ addClickElemId("approval_submit", function() {
 
 
 
-function getErrorMsg(msg) {
-    let errorMsg = document.createElement("span");
-    errorMsg.textContent=msg;
-    errorMsg.classList.add("errorMsg");
-    return errorMsg;
-}
 
-function setAsInvalid(a){
-    if (a.classList.contains("valid_input_value")) a.classList.remove("valid_input_value");
-    if (!a.classList.contains("invalid_input_value")) a.classList.add("invalid_input_value");
-}
 
-function setAsValid(a){
-    if (a.classList.contains("invalid_input_value")) a.classList.remove("invalid_input_value");
-    if (!a.classList.contains("valid_input_value")) a.classList.add("valid_input_value");
-
-}
-
-function functionIfNotNumber(a){
-    if (isNaN(a.value) &&  a.value!=null) {
-        setAsInvalid(a);
-        if(!a.nextElementSibling.classList.contains("errorMsg")){
-            a.insertAdjacentElement("afterend", getErrorMsg("Input must be a number."));
+function validateNumericInput(a){
+    if (checkIfNull(a.value)){
+        setAsWaiting(a);
+        if (checkHasErrorMsg(a)) {
+            removeErrorMsg(a);
         }
+    }else if (checkIfPositiveInt(a.value)==false) {
+        setAsInvalid(a);
+        if(checkHasErrorMsg(a)==false){
+            appendErrorMsg(a, "Input must be a number.")
+        }
+    }else if (checkIfPositiveInt(a.value)){
+        setAsValid(a);
+        if (checkHasErrorMsg(a)) removeErrorMsg(a);
     }
-    else if ((!isNaN(a.value) || a.value==null) && a.classList.contains("invalid_input_value") ) {
-        if (a.nextElementSibling.classList.contains("errorMsg")) a.nextElementSibling.remove();
-        if (!isNaN(a.value) &&  a.value>0) setAsValid(a);
-    }
+
 }
 
 let thisInput = document.querySelector("#num_of_applicants");
 thisInput.addEventListener("keyup", function () {
-    functionIfNotNumber(thisInput);
+    validateNumericInput(thisInput);
 });
 
 
